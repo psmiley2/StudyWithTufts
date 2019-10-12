@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{%block title%}Homepage ~ StudyTufts{%endblock%}
+
+{%block content%}
+{%if logged_in%}
+ <section class="has-background-white-ter hero is-success is-fullheight">
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <div class="column is-4 is-offset-4">
+                    <h5 id='welcome' class="title has-text-primary">{{ user|title }}, Welcome to StudyWithTufts</h5>
+                     <a id="padding_bod" href="{% url 'groups:index'%}" class="button is-link ">Groups</a>
+                    <a id="padding_bod" href="{% url 'classes:index' %}" class="button has-background-white-ter has-text-link">Classes</a>
+                    <br><br><br>
+                    <br><br><br>
+                    <br><br><br>
+
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+{%else%}
+ <section class="has-background-white hero is-success is-fullheight">
+        <div class="hero-body">
+            <div class="has-text-primary container has-text-centered">
+                <div class="column is-6 is-offset-3">
+                    <h5>StudyWithTufts, because Bio and Chem aren't the only classes where group work helps </h5>
+                </div>
+                <a id="intro_button" href="{% url 'users:login'%}" class="button is-link">Login</a>
+                <a id="intro_button" href="{% url 'users:register' %}" class="button has-background-white-ter has-text-link">Register</a>
+            </div>
+        </div>
+    </section>
+
+
+{%endif%}
+{%endblock%}

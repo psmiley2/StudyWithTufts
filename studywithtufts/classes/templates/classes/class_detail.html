@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+
+{%block title%}{{classes.title}} ~ StudyWithTufts{%endblock%}
+
+{%block content%}
+
+
+<div id="groups_header">
+ <a id="custom_back" href="{% url 'classes:index' %}" class="button is-link is-pulled-left">Go Back</a>
+  <h1 id="group_header" class=".has-text-centered has-text-primary">{{classes.title}}</h1>
+</div>
+
+<section class="container cards-container">
+    <div class="columns is-centered is-multiline" id="sectioncontainer">
+      <div class="column is-narrow" v-for="yxy in filteredCards">
+
+        <table class="table is-bordered">
+          <thead>
+            <tr>
+              <th>
+                Group Name
+              </th>
+              <th>
+                Teacher
+              </th><th>
+                Mon
+              </th><th>
+                Tue
+              </th><th>
+                Wed
+              </th><th>
+                Thur
+              </th><th>
+                Fri
+              </th><th>
+                Sat
+              </th><th>
+                Sun
+              </th><th>
+                Availability
+              </th><th>
+                Sign Up
+              </th>
+            </tr>
+          </thead>
+          {%for group in classes.studygroup_set.all%}
+          <tr>
+            <td>
+              {{group.title}}
+            </td>
+            <td>
+              {{group.teacher}}
+            </td>
+            <td>
+              {% if group.monday %}
+                {{group.mon}}
+              {% else %}
+                -
+              {%endif%}
+            </td><td>
+              {% if group.tuesday %}
+                {{group.tue}}
+              {% else %}
+                -
+              {%endif%}
+            </td><td>
+              {% if group.wednesday %}
+                {{group.wed}}
+              {% else %}
+                -
+              {%endif%}
+            </td><td>
+              {% if group.thursday %}
+                {{group.thur}}
+              {% else %}
+                -
+              {%endif%}
+            </td><td>
+              {% if group.friday %}
+                {{group.fri}}
+              {% else %}
+                -
+              {%endif%}
+            </td><td>
+              {% if group.saturday %}
+                {{group.sat}}
+              {% else %}
+                -
+              {%endif%}
+            </td><td>
+              {% if group.sunday %}
+                {{group.sun}}
+              {% else %}
+                -
+              {%endif%}
+            </td>
+            <td>
+              {{group.current_size}} / {{group.max_size}}
+            </td>
+            <td>
+              <form method="POST" action='/classes/join/{{ group.id }}'>
+                  {% csrf_token %}
+                  <div class="control">
+                      <button class="button is-primary">Join!</button>
+                  </div>
+              </form>
+            </td>
+          </tr>
+          {%endfor%}
+        </table>
+
+ <a id="custom_add_group" href="{% url 'groups:add_group'  pk=classes.pk  %}" class="button is-warning is-pulled-right">Create Group</a>
+
+      </div>
+    </div>
+  </section>
+
+{%endblock%}

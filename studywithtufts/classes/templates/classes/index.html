@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{%block title%}Forum ~ StudyWithTufts{%endblock%}
+
+{%block content%}
+
+
+
+<section class="container">
+
+        <div id='forum_container' class="columns">
+            <div id='forum_search_container' class="column is-3">
+                <a id="padding_bod" href="{% url 'classes:add_class'  %}" class="button is-success">Add a Class</a>
+                <a id="padding_bod" href="{% url 'classes:add_subject'  %}" class="button is-warning">Add a Subject</a>
+                <div class="box content">
+                <h4>Search By Subject</h4>
+                <aside class="menu">
+                    <ul class="menu-list">
+                        {%for subject in subjects%}
+                        <li><a href="{% url 'classes:filter' pk=subject.pk%}"><span id='subjecthome' class="tag is-medium is-medium ">{{subject.title}}</span></a></li>
+                        {%endfor%}
+                    </ul>
+                </aside>
+                </div>
+            </div>
+            {%if classes %}
+            <div class="column is-9">
+                {% for class in classes %}
+                <div class="box content">
+                    <article class="post">
+                        <h4>{{ class.title }}</h4>
+                        <div class="media">
+                            <div class="media-content">
+                                <div class="content">
+                                    <p>
+                                        {{class.subject}} - {{class.course_number}} &nbsp;
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="media-right">
+                              <form method="POST" action='/classes/{{ class.id }}'>
+                                    {% csrf_token %}
+                                    <div class="control">
+                                        <button class="button is-primary">Select</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                {% endfor %}
+            </div>
+            {%else%}
+                <section class="has-background-white hero is-success is-fullheight">
+                        <div class="has-text-primary container has-text-centered">
+                            <div class="column is-6 is-offset-3">
+                                <h5>No classes! </h5>
+                            </div>
+
+                </section>
+            {%endif%}
+        </div>
+    </section>
+
+{%endblock%}

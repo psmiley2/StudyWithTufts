@@ -1,0 +1,110 @@
+a:hover{
+    color: green;
+}
+
+#forum_search_container{
+    padding: 0px;
+    margin-top: 1%;
+}
+
+#forum_container{
+    margin-top: 3%;
+}
+
+#bold{
+    font-weight: bold;
+}
+
+
+#thenav{
+    border: 1px solid grey;
+    border-radius: 3px;
+    z-index: 1000;
+}
+
+#subjecthome:hover{
+    color:  hsl(204, 86%, 53%);
+}
+
+#groupmenu{
+    margin-top: 5%;
+    border: 1px solid grey;
+}
+
+.post_detail{
+    max-width: 750px;
+    margin-top: 5%;
+}
+
+h5{
+    font-weight: bold;
+    font-size: 150%;
+}
+
+#comment_section{
+    max-width: 750px;
+    min-width: 45%;
+}
+
+#grouplist{
+    margin-top: 3%;
+}
+
+#list_students{
+    margin: 0 3% 0 0;
+    font-weight: bold;
+}
+
+#inline{
+    min-width: 50%;
+}
+
+#padding_bod{
+    margin: 3% 3%;
+    width: 100%;
+    z-index: 100;
+}
+
+
+#welcome{
+    line-height: 200%;
+    font-size: 250%
+}
+
+#groups_header{
+    width: 100%;
+}
+
+#group_header{
+    font-weight: bold;
+    text-align: center;
+    font-size: 300%;
+}
+
+#back_button{
+    padding: 0 35%;
+}
+
+#back_button:hover{
+    background-color:
+}
+
+#sidebarcontainer{
+    width: 8%;
+    margin: 1%;
+}
+
+#custom_add_group{
+    width: 20%;
+}
+
+#custom_back{
+    width: 7%;
+    margin: 1% 0 1% 1%;
+    padding: 1% 2%;
+}
+
+#intro_button{
+    width: 15%;
+    margin: 3%;
+}

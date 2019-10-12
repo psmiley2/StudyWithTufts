@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}
+    Login
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="columns is-mobile">
+            <div class="column is-half is-offset-one-quarter">
+                <h3 class="title is-size-3">You have been logged out</h3>
+                <form action="{% url 'users:login' %}" method="post">
+                    {% csrf_token %}
+                    <input type="submit" value="Login Again" class="button is-primary">
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

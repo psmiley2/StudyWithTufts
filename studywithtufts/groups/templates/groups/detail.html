@@ -1,0 +1,158 @@
+{% extends 'base.html' %}
+
+{%block title%}{{group.title}} ~ StudyWithTufts{%endblock%}
+
+{%block content%}
+
+<div id="groups_header">
+
+  <h1 id="group_header" class=".has-text-centered has-text-primary">{{group}}</h1>
+</div>
+
+<div id="sidebarcontainer" class="is-pulled-left">
+ <a id="padding_bod" href="{% url 'groups:index'%}" class="button is-link ">Go Back</a>
+  <a id="padding_bod" href="{% url 'groups:add_post' group.id %}" class="button is-warning ">Add Post</a>
+  <a id="padding_bod" href="{% url 'groups:leave_group' student_pk=user.userinfo.id group_pk=group.id%}" class="button is-danger">Leave Group</a>
+<table  class="table is-bordered" id="list_students">
+
+  <hr>
+          <tr>
+            <td>
+            Students:
+          </td>
+          </tr>
+      {%for student in group.userinfo_set.all%}
+          <tr>
+            <td>
+            {{student}}
+          </td>
+          </tr>
+        {%endfor%}
+    </table>
+    <hr>
+
+</div>
+<section class="container cards-container">
+      <div class="columns is-centered is-multiline" id="sectioncontainer">
+
+        <table class="table is-bordered">
+          <thead>
+            <tr>
+              <th>
+                Group Name
+              </th>
+              <th>
+                Teacher
+              </th><th>
+                Mon
+              </th><th>
+                Tue
+              </th><th>
+                Wed
+              </th><th>
+                Thur
+              </th><th>
+                Fri
+              </th><th>
+                Sat
+              </th><th>
+                Sun
+              </th><th>
+                Availability
+              </th>
+            </tr>
+          </thead>
+          <tr>
+            <td>
+              {{group.title}}
+            </td>
+            <td>
+              {{group.teacher}}
+            </td>
+            <td>
+              {% if group.monday %}
+                {{group.mon}}
+              {% else %}
+                -
+              {%endif%}
+            </td><td>
+              {% if group.tuesday %}
+                {{group.tue}}
+              {% else %}
+                -
+              {%endif%}
+            </td><td>
+              {% if group.wednesday %}
+                {{group.wed}}
+              {% else %}
+                -
+              {%endif%}
+            </td><td>
+              {% if group.thursday %}
+                {{group.thur}}
+              {% else %}
+                -
+              {%endif%}
+            </td><td>
+              {% if group.friday %}
+                {{group.fri}}
+              {% else %}
+                -
+              {%endif%}
+            </td><td>
+              {% if group.saturday %}
+                {{group.sat}}
+              {% else %}
+                -
+              {%endif%}
+            </td><td>
+              {% if group.sunday %}
+                {{group.sun}}
+              {% else %}
+                -
+              {%endif%}
+            </td>
+            <td>
+              {{group.current_size}} / {{group.max_size}}
+            </td>
+          </tr>
+        </table>
+
+
+
+
+        <div class="column is-9">
+                {% for post in group.post_set.all reversed  %}
+                <div class="box content">
+                    <article class="post">
+                        <h4>{{ post.title }}</h4>
+                        <div class="media">
+                            <div class="media-content">
+                                <div class="content">
+                                    <p>
+                                        {{post.content}}&nbsp;
+                                    </p>
+                                </div>
+                                 <br>
+                          <div id="inline">
+                           By {{post.user.username}} on {{post.time_posted}}
+                           <form method="POST" action='/groups/{{ group.id }}/post/{{ post.id }}'>
+                                    {% csrf_token %}
+                                    <div class="control">
+                                        <button class="button is-primary is-pulled-right">Select</button>
+                                    </div>
+                                </form>
+                            </div>
+                          </div>
+                        </div>
+                    </article>
+                </div>
+                {% endfor %}
+            </div>
+
+</div>
+  </section>
+
+
+
+{%endblock%}

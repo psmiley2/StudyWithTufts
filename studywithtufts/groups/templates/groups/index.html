@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{%block title%}Forum ~ StudyWithTufts{%endblock%}
+
+{%block content%}
+
+{%if user.userinfo.groups.all %}
+<section id="grouplist" class="container">
+      <div class="columns is-centered is-multiline" id="sectioncontainer">
+            <div class="column is-9">
+                {% for group in user.userinfo.groups.all %}
+                <div class="box content">
+                    <article class="post">
+                        <h4>{{ group.title }}</h4>
+                        <div class="media">
+                            <div class="media-content">
+                                <div class="content">
+                                    <p>
+                                        {{group.classes.subject}} - {{group.classes.course_number}} - {{group.teacher}} &nbsp;
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="media-right">
+                              <form method="POST" action='/groups/{{ group.id }}'>
+                                    {% csrf_token %}
+                                    <div class="control">
+                                        <button class="button is-primary">Select</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{%else%}
+    <section class="has-background-white hero is-success is-fullheight">
+        <div class="hero-body">
+            <div class="has-text-primary container has-text-centered">
+                <div class="column is-6 is-offset-3">
+                    <h5>Join a study group! </h5>
+                </div>
+                <a id="padding_bod" href="{% url 'classes:index' %}" class="button has-background-white-ter has-text-primary">Classes</a>
+            </div>
+        </div>
+    </section>
+{% endif %}
+{%endblock%}

@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{%block title%}{{classes.title}} ~ StudyWithTufts{%endblock%}
+
+{%block content%}
+
+<section class="container cards-container">
+    <div class="columns is-centered is-multiline" id="sectioncontainer">
+        <div class="post_detail">
+          <article class="post">
+              <h5>{{ post.title }}</h5>
+              <div class="media">
+                  <div class="media-content">
+                      <div class="content">
+                          <p>
+                              {{post.content}}&nbsp;
+                          </p>
+                      </div>
+                       <br>
+                  By {{post.user.username}} on {{post.time_posted}}
+                  </div>
+              </div>
+          </article>
+        </div>
+    </div>
+<br>
+<br>
+<br>
+<br>
+
+
+
+      <div class="columns is-centered is-multiline" id="sectioncontainer">
+            <div id="comment_section">
+                <div class="box content">
+                  <h5 class='is-pulled-left'>Comments:</h5>
+                  <a  href="{% url 'groups:add_comment' pk=post.pk %}" class="button is-success is-pulled-right">Add a Comment</a>
+
+                  <hr>
+                  {%for comment in post.comment_set.all%}
+                    <article class="post">
+                        <p>{{comment.content}}&nbsp;</p>
+                        <div class="media">
+                            <div class="media-content">
+                                <div class="content">
+                                    <small>
+                                       By {{post.user.username}} on {{post.time_posted}} &nbsp;
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    <hr>
+                    {% endfor %}
+                </div>
+
+            </div>
+          </div>
+ </section>
+
+{%endblock%}
